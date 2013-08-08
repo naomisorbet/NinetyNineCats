@@ -1,0 +1,7 @@
+<h1> Just one cat: </h1>
+
+<ul>
+<%@cat.attributes.each do |name, value| %>
+	<li><%= "#{name}: #{value}"%></li>
+<%end%>
+</ul>

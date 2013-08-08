@@ -1,0 +1,34 @@
+<h1>Enter your cat</h1>
+<form action="<%= cats_url %>" method="post">
+
+	<label for="cat_name">Name:</label>
+	<input type="text" name="cat[name]" id="cat_name">
+	<br>
+
+	<label for="cat_age">Age:</label>
+	<input type="text" name="cat[age]" id="cat_age">
+	<br>
+
+	<label for="cat_birth_date">Birth date </label>
+	<input type ="date" name="cat[birth_date]" id="cat_birth_date">
+	<br>
+
+	<label for="cat_color">Color </label>
+	<select name="cat[color]" id="cat_color">
+		<%@colors.each do |color|%>
+			<option value="<%=color%>"><%=color.capitalize%></option>
+		<%end%>
+	</select>
+	<br>
+
+	Sex:
+	<%@sexes.each do |sex|%>
+		<label for="cat_sex<%= sex %>"><%=sex%></label>
+		<input type="radio" name="cat[sex]" id="cat_sex" value="<%= sex %>">
+	<%end%>
+	<br>
+
+	<input type="submit">
+
+</form>
+

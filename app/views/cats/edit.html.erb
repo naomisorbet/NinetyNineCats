@@ -1,0 +1,42 @@
+<h1>Human: edit your cat.</h1>
+<form action="<%=cat_url(@cat)%>" method="post">
+
+	<input type="hidden" name="_method" value="put">
+
+	<label for="cat_name">Name:</label>
+	<input type="text" name="cat[name]" id="cat_name" value="<%=@cat.name%>">
+	<br>
+
+	<label for="cat_age">Age:</label>
+	<input type="text" name="cat[age]" id="cat_age" value="<%=@cat.age%>">
+	<br>
+
+	<label for="cat_birth_date">Birth date </label>
+	<input type ="date" name="cat[birth_date]" id="cat_birth_date" 			value="<%=@cat.birth_date%>">
+	<br>
+
+	<label for="cat_color">Color </label>
+	<select name="cat[color]" id="cat_color">
+		<%@colors.each do |color|%>
+			<option value="<%=color%>"<%="selected" if color == @cat.color%>><%=color.capitalize%></option>
+		<%end%>
+	</select>
+	<br>
+
+	Sex:
+	<%@sexes.each do |sex|%>
+		<label for="cat_sex<%= sex %>"><%=sex%></label>
+		<input type="radio" name="cat[sex]" id="cat_sex" value="<%= sex %>"<%= "checked" if sex == @cat.sex%>>
+	<%end%>
+	<br>
+
+	<input type="submit">
+
+</form>
+
+
+<form action="<%=cat_url(@cat)%>" method="post">
+	<input type="hidden" name="_method" value="delete">
+
+	<input type="submit" value="DESTROY THIS CAT. WARNING: CANNOT BE UNDONE!">
+</form>
