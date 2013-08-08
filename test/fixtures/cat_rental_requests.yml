@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  cat_id: 1
+  begin_date: 2013-08-08 15:17:30
+  end_date: 2013-08-08 15:17:30
+
+two:
+  cat_id: 1
+  begin_date: 2013-08-08 15:17:30
+  end_date: 2013-08-08 15:17:30
