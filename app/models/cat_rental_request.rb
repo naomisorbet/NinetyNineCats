@@ -4,6 +4,8 @@ class CatRentalRequest < ActiveRecord::Base
   validate :validate_range
   validate :cannot_overlap
 
+  belongs_to :cat
+
 
 
   private
@@ -16,7 +18,7 @@ class CatRentalRequest < ActiveRecord::Base
   def cannot_overlap
     other_rentals_of_cat = CatRentalRequest.where("cat_id = ?", self.cat_id)
 
-    if other_rentals_of_cat.any? { |rental| self.overlaps?(rental) }
+    if other_rentals_of_cat.any? { |rental| overlaps?(rental) }
       errors[:overlap] << ":-( this cat is already rented during this time."
     end
   end

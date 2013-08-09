@@ -13,4 +13,9 @@ class Cat < ActiveRecord::Base
   validates :color, :inclusion => {:in => self.colors}
   validates :sex, :inclusion => {:in => self.sexes}
 
+  has_many :rental_requests, :class_name => "CatRentalRequest", :dependent => :destroy
+
+  def to_s
+    self.name
+  end
 end

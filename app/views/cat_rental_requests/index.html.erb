@@ -1,0 +1,11 @@
+<h1>Here are all the rentals</h1>
+
+<ul>
+	<%@cat_rental_requests.each do |request|%>
+		<li><%=request.cat%>
+			<ul>
+				<li>Begins on: <%= request.begin_date%></li>
+				<li>Ends on: <%= request.end_date%></li>
+			</ul>
+		<%end%>
+</ul>

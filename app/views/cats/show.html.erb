@@ -1,7 +1,20 @@
-<h1> Just one cat: </h1>
+<h1><%=@cat%></h1>
 
+<h2>About Me</h2>
 <ul>
-<%@cat.attributes.each do |name, value| %>
-	<li><%= "#{name}: #{value}"%></li>
-<%end%>
+	<%@cat.attributes.each do |name, value| %>
+		<%next if name == "name"%>
+		<li><%= "#{name.capitalize}: #{value}"%></li>
+	<%end%>
+</ul>
+
+<h2>My Rentals</h2>
+<ul>
+	<%@cat.rental_requests
+		.sort_by{ |request| request.begin_date }
+		.each do |request| %>
+		<li>Status: <strong><%=request.status%></strong></li>
+		<li>Begin date: <%=request.begin_date%></li>
+		<li>End date: <%=request.end_date %></li>
+	<%end%>
 </ul>
