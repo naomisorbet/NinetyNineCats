@@ -7,6 +7,25 @@ class CatRentalRequest < ActiveRecord::Base
   belongs_to :cat
 
 
+  def approve
+    return nil unless self.status == 'undecided'
+    self.status = 'approved'
+    self.save!
+
+    self.class.pending_rentals.each do |pending_rental|
+      pending_rental.status = 'denied' if overlaps?(pending_rental)
+    end
+
+    true
+  end
+
+  def self.approved_rentals
+    self.where("status = 'approved'")
+  end
+
+  def self.pending_rentals
+    self.where("status = 'undecided'")
+  end
 
   private
 
@@ -16,7 +35,8 @@ class CatRentalRequest < ActiveRecord::Base
   end
 
   def cannot_overlap
-    other_rentals_of_cat = CatRentalRequest.where("cat_id = ?", self.cat_id)
+    other_rentals_of_cat =
+      self.class.approved_rentals.where("cat_id = ?", self.cat_id)
 
     if other_rentals_of_cat.any? { |rental| overlaps?(rental) }
       errors[:overlap] << ":-( this cat is already rented during this time."

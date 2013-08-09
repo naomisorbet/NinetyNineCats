@@ -2,19 +2,25 @@
 
 <h2>About Me</h2>
 <ul>
-	<%@cat.attributes.each do |name, value| %>
-		<%next if name == "name"%>
-		<li><%= "#{name.capitalize}: #{value}"%></li>
-	<%end%>
+  <%@cat.attributes.each do |name, value| %>
+    <%next if name == "name"%>
+    <li><%= "#{name.capitalize}: #{value}"%></li>
+  <%end%>
 </ul>
 
-<h2>My Rentals</h2>
-<ul>
-	<%@cat.rental_requests
-		.sort_by{ |request| request.begin_date }
-		.each do |request| %>
-		<li>Status: <strong><%=request.status%></strong></li>
-		<li>Begin date: <%=request.begin_date%></li>
-		<li>End date: <%=request.end_date %></li>
-	<%end%>
-</ul>
+<h2>Rental Requests</h2>
+
+<%@cat.rental_requests
+  .sort_by{ |request| request.begin_date }
+  .each_with_index do |request, i| %>
+
+  <h3>Request <%= i + 1 %></h3>
+    <li>Status: <strong><%=request.status%></strong></li>
+    <li>Begin date: <%=request.begin_date%></li>
+    <li>End date: <%=request.end_date %></li>
+    <%if request.status == 'undecided'%>
+      <%= render partial: "cat_rental_requests/approve_and_deny",
+                 locals: {cat_rental_request: request}%>
+    <%end%>
+  </ul>
+<%end%>

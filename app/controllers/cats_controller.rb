@@ -25,7 +25,7 @@ class CatsController < ApplicationController
   end
 
   def edit
-    @cat = Cat.find_by_id(params[:id]).includes(:rental_requests)
+    @cat = Cat.find_by_id(params[:id])
     @colors = Cat.colors
     @sexes = Cat.sexes
     render :edit

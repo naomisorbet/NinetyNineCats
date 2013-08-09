@@ -1,0 +1,4 @@
+<h1>Approve Request for <%=@cat_rental_request.cat%>?</h1>
+
+<%= render partial: "cat_rental_requests/approve_and_deny",
+           locals: {cat_rental_request: @cat_rental_request}%>
