@@ -18,16 +18,6 @@ class CatRentalRequestsController < ApplicationController
     render :show
   end
 
-  def edit
-    @cat_rental_request = CatRentalRequest.find(params[:id])
-
-    if @cat_rental_request.status == 'undecided'
-      render :edit
-    else
-      render :show
-    end
-  end
-
   def update
     @cat_rental_request = CatRentalRequest.find(params[:id])
     @cat_rental_request.update_attributes(params[:cat_rental_request])
