@@ -7,7 +7,7 @@ class CatRentalRequestsController < ApplicationController
   end
 
   def create
-    @cat_rental_request = CatRentalRequest.create(params[:cat_rental_request])
+    @cat_rental_request = CatRentalRequest.create!(params[:cat_rental_request])
     if @cat_rental_request
       redirect_to cat_rental_request_url(@cat_rental_request)
     else
@@ -22,8 +22,14 @@ class CatRentalRequestsController < ApplicationController
 
   def update
     @cat_rental_request = CatRentalRequest.find(params[:id])
-    @cat_rental_request.update_attributes(params[:cat_rental_request])
-    @cat_rental_request.save!
+
+    if params[:cat_rental_request][:status] == 'approved'
+      @cat_rental_request.approve
+    else
+      @cat_rental_request.update_attributes(params[:cat_rental_request])
+      @cat_rental_request.save!
+    end
+
     render :show
   end
 end
