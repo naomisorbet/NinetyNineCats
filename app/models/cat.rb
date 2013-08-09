@@ -1,6 +1,7 @@
 class Cat < ActiveRecord::Base
-  attr_accessible :age, :birth_date, :color, :name, :sex
-  validates :age, :birth_date, :color, :name, :sex, :presence => :true
+  attr_accessible :age, :birth_date, :color, :name, :owner_id, :sex
+  validates :age, :birth_date, :color, :name, :owner_id, :sex, :presence => :true
+  belongs_to :owner, :class_name => "User"
 
   def self.colors
     ["brown", "black", "orangeish", "calico"]

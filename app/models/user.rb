@@ -1,9 +1,8 @@
-require 'bcrypt'
-
 class User < ActiveRecord::Base
   attr_accessible :username, :password
   validates :username, uniqueness: :true
   before_create :hash_password
+  has_many :cats
 
   def give_session_token
     self.session_token = SecureRandom.urlsafe_base64

@@ -1,4 +1,6 @@
 class CatRentalRequestsController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
     @cat_rental_requests = CatRentalRequest.includes(:cat).order(:begin_date)
     render :index

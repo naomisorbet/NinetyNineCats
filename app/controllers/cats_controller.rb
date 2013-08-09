@@ -8,6 +8,7 @@ class CatsController < ApplicationController
 
   def show
     @cat = Cat.find(params[:id])
+    @user = current_user
     render :show
   end
 
@@ -18,7 +19,10 @@ class CatsController < ApplicationController
   end
 
   def create
-    @cat = Cat.create(params[:cat])
+    @cat = Cat.new(params[:cat])
+    @cat.owner_id = current_user.id
+    @cat.save!
+
     if @cat
       redirect_to cat_url(@cat)
     else
